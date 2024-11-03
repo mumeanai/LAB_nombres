@@ -47,7 +47,9 @@ def calcular_nombres(frecuencias, genero):
     for p in frecuencias:
         if p.genero == None or p.genero == genero:
             nombre_genero.add(p.nombre)
-    return nombre_genero
+        elif genero == None:
+            nombre_genero.add(p.nombre)
+    return sorted(list(nombre_genero))
 
 def calcular_nombres_ambos_generos(frecuencias): 
     '''
@@ -73,8 +75,11 @@ def calcular_nombres_compuestos(frecuencias, genero):
     en cuyo caso se incluyen en el conjunto todos los nombres. El valor por defecto del género es None.
     '''
     nombre_genero = set()
+    
     for p in frecuencias:
-        if (p.genero == None or p.genero == genero) and len(p.nombre) >= 2:
+        if p.genero == genero and " " in p.nombre:
+            nombre_genero.add(p.nombre)
+        elif genero == None and " " in p.nombre:
             nombre_genero.add(p.nombre)
     return nombre_genero
 
@@ -86,14 +91,18 @@ def calcular_frecuencia_media_nombre_años(frecuencias, nombre, año_i, año_f):
     parámetro en el rango de años [año_inicial, año_final) formado por el año inicial y el año
     final dados como parámetro. Si no se puede calcular la media devuelve 0.
     '''
-    res = []
-    nombres = 0
-    veces = 0
+    
+    total_frecuencia = 0
+    contador = 0
     for p in frecuencias:
-        nombres += 1
         if (p.nombre == nombre) and (año_i <= p.año < año_f): 
-            veces += 1
-    return nombres/veces
+            contador += 1
+            total_frecuencia += p.frecuencia
+    if contador > 0:
+        frecuencia_media = total_frecuencia/contador
+    else:
+        frecuencia_media = 0
+    return frecuencia_media
         
     
 
