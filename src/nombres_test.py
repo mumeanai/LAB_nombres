@@ -11,9 +11,14 @@ def test_filtrar_por_genero(datos):
     print("Número de registros para 'Mujer': ", len(filtrar_por_genero(datos, "Mujer")))
     
 def test_calcular_nombres(datos):
-    print("- Ambos géneros:", calcular_nombres(datos, None))
-    print("- Mujeres:", calcular_nombres(datos, "Mujer"))
-    print("- Hombres:", calcular_nombres(datos, "Hombre"))
+    print("- Ambos géneros:", calcular_nombres(datos, None)[:10])
+    print("- Mujeres:", calcular_nombres(datos, "Mujer")[:10])
+    print("- Hombres:", calcular_nombres(datos, "Hombre")[:10])
+    
+def test_calcular_top_nombres_de_año(datos):
+    print("- Ambos géneros:", calcular_top_nombres_de_año(datos, None))
+    print("- Mujeres:", calcular_top_nombres_de_año(datos, "Mujer"))
+    print("- Hombres:", calcular_top_nombres_de_año(datos, "Hombre"))
     
 def test_calcular_nombres_ambos_generos(datos):
     print("Nombres:", calcular_nombres_ambos_generos(datos))
@@ -32,6 +37,7 @@ if __name__=="__main__":
     test_leer_frecuencias_nombres()
     test_filtrar_por_genero(datos)
     test_calcular_nombres(datos)
+    test_calcular_top_nombres_de_año(datos)
     test_calcular_nombres_ambos_generos(datos)
     test_calcular_nombres_compuestos(datos)
     test_calcular_frecuencia_media_nombre_años(datos)

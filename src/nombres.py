@@ -51,6 +51,30 @@ def calcular_nombres(frecuencias, genero):
             nombre_genero.add(p.nombre)
     return sorted(list(nombre_genero))
 
+def calcular_top_nombres_de_año(frecuencias, año, limite= 10, genero=None):
+    '''
+    recibe una lista de tuplas de tipo FrecuenciaNombre, 
+    un año de tipo int, un número límite de tipo int y un género
+    de tipo str, y devuelve una lista de tuplas (nombre, frecuencia) 
+    de tipo (str, int) con los nombres más frecuentes del año y 
+    el género dados, ordenada de mayor a menor frecuencia, y con un 
+    máximo de límite nombres. El género puede ser 'Hombre', 'Mujer' 
+    o tener un valor None, en cuyo caso se incluyen en la lista todos 
+    los nombres. El valor por defecto del límite es 10 y el del género es None.
+    '''
+    res = []
+    lista_nombres = []
+    for p in frecuencias:
+        if (p.genero == genero or p.genero == None) and p.año == año:
+            lista_nombres.append((p.nombre, p.frecuencia))
+    lista_nombres.sort( key = lambda tupla:tupla[1], reverse = True) 
+    #si solo pongo .sort() estoy ordenando segun el primer paramentro de las tuplas en la lista
+    return lista_nombres[:limite]
+    #devuelve una sublista que va desde el principio hasta la posicion limite-1
+        
+    
+    
+
 def calcular_nombres_ambos_generos(frecuencias): 
     '''
     recibe una lista de tuplas de tipo FrecuenciaNombre, 
